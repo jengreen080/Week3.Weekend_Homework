@@ -11,8 +11,10 @@ def add_book():
     title = request.form['title']
     author = request.form['author']
     genre = request.form['genre']
+    description = request.form['description']
+    rating = request.form['rating']
     #   recurring = True if 'recurring' in request.form else False
-    new_book = Book(title, author, genre)
+    new_book = Book(title, author, genre, description, rating)
     add_new_book_to_list(new_book)
     return redirect('/books/')
 
@@ -20,3 +22,8 @@ def add_book():
 def delete_book(title):
     remove_book_from_list(title)
     return redirect('/books/')
+
+@app.route('/books/<index>')
+def selected_book(index):
+    selected_book = list_of_books[int(index)]
+    return render_template('book.html', book = selected_book)

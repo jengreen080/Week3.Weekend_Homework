@@ -1,9 +1,6 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-        <title>Book List</title>
-    </head>
-    <body>
+{% extends "base.html" %}
+
+{% block content %}
         <form action="/books" method="post">
             <label for="title">Title</label>
             <input type="text" name="title" id="title">
@@ -11,6 +8,10 @@
             <input type="text" name="author" id="author">
             <label for="genre">Genre</label>
             <input type="text" name="genre" id="genre">
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description">
+            <label for="rating">Rating</label>
+            <input type="text" name="rating" id="rating">
             <input type="submit" value="Add Book">
         </form>
         
@@ -22,11 +23,11 @@
         <div class="books">
             <p>Title:    {{book.title }}<br>
                 Author:  {{book.author}}<br>
-                Genre:   {{book.genre}}</p>
+                Genre:   {{book.genre}}<br>
+                <a href="/books/{{books.index(book)}}">More book information</a></p>
                 <form class="form-inline" action="/books/delete/{{ book.title }}" method="POST">
                     <input type="submit" value="Delete">
                 </form>
         </div>
         {% endfor %}
-    </body>
-</html>
+{% endblock %}
